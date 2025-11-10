@@ -124,10 +124,10 @@ export async function sdkData(req: any, callback: any) {
           io.emit(`zogsool${zogsool.baiguullagiinId}`, { khaalgaTurul: 'oroh', cameraIP: body.CAMERA_IP });
         if (!!uilchluulegch) {
           const freeze = new Date(uilchluulegch.freezeOgnoo);
-          const freezePlus = new Date(freeze.getTime() + (zogsool?.garakhTsag || 30) * 60000);
-          if (!isNaN(freeze.getTime()) && freezePlus > new Date()) {
+          const diffTime = Math.abs(odoo.getTime() - freeze.getTime());
+          const diffMinutes = Math.floor(diffTime / (1000 * 60));
+          if (!isNaN(freeze?.getTime()) && diffMinutes <= (zogsool?.garakhTsag || 30) && diffMinutes >= 0)
             odoo = freeze;
-          }
           let dun = 0;
           let dotorZogsoolMinut = 0;
           if (!zogsool?.gadnaZogsooliinId && uilchluulegch.tuukh && uilchluulegch.tuukh.length > 1) {
@@ -1299,10 +1299,9 @@ export async function zogsooliinDunAvya(zogsool: any, uilchluulegch: any, tukhai
   try {
     var odoo = new Date();
     const freeze = new Date(uilchluulegch.freezeOgnoo);
-    const freezePlus = new Date(freeze.getTime() + (zogsool?.garakhTsag || 30) * 60000);
-    if (!isNaN(freeze.getTime()) && freezePlus > new Date()) {
-      odoo = freeze;
-    }
+    const diffTime = Math.abs(odoo.getTime() - freeze.getTime());
+    const diffMinutes = Math.floor(diffTime / (1000 * 60));
+    if (!isNaN(freeze?.getTime()) && diffMinutes <= (zogsool?.garakhTsag || 30) && diffMinutes >= 0) odoo = freeze;
     let dun = 0;
     let dotorZogsoolMinut = 0;
     let dotorZogsoolDun = 0;
