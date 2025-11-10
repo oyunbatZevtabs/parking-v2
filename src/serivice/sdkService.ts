@@ -26,7 +26,7 @@ export async function sdkData(req: any, callback: any) {
         dugaar: body.mashiniiDugaar,
       };
       const matchOlonMashin: any = {
-        mashinuud: { $in: [body.mashiniiDugaar] }
+        mashinuud: { $in: [body.mashiniiDugaar] },
       };
       const queryParking: any = {
         'khaalga.camera.cameraIP': body.CAMERA_IP,
@@ -37,8 +37,7 @@ export async function sdkData(req: any, callback: any) {
       if (zogsooluud.length > 0) {
         zogsool = zogsooluud[0];
       }
-      if (zogsool.barilgaTusBur) 
-      {
+      if (zogsool.barilgaTusBur) {
         mathchMashin['barilgiinId'] = zogsool.barilgiinId;
         matchOlonMashin['barilgiinId'] = zogsool.barilgiinId;
       }
@@ -461,12 +460,17 @@ export async function sdkData(req: any, callback: any) {
                   urisanMashin.save();
                   uilchluulegch.urisanMashin = urisanMashin;
                 }
-              } else if (uilchluulegch?.turul === 'Байгууллага' && !!uilchluulegch?.mashin?._id && uilchluulegch?.mashin?.mashinuud?.length > 0) {
+              } else if (
+                uilchluulegch?.turul === 'Байгууллага' &&
+                !!uilchluulegch?.mashin?._id &&
+                uilchluulegch?.mashin?.mashinuud?.length > 0
+              ) {
                 const bgMashin = await (Mashin as any)(body.tukhainBaaziinKholbolt).findById(
                   uilchluulegch?.mashin?._id,
                 );
                 if (!!bgMashin) {
-                  const khugatsaaniiZuruu = (zogsool.tulburuud[0].tariff[0].tulbur == 0 ? zogsool.tulburuud[0].tariff[0].minut : 0) - niitMinut;
+                  const khugatsaaniiZuruu =
+                    (zogsool.tulburuud[0].tariff[0].tulbur == 0 ? zogsool.tulburuud[0].tariff[0].minut : 0) - niitMinut;
                   if (khugatsaaniiZuruu >= 0) {
                     tuukh.tulukhDun = 0;
                   } else {
@@ -579,8 +583,7 @@ export async function sdkData(req: any, callback: any) {
                 (!!tokiUilchluulegch && !!tokiUilchluulegch.garakhTsag && tokiUilchluulegch.garakhTsag > new Date())
               ) {
                 const dun = tuukh.tulbur?.reduce((a: any, b: any) => a + (b.dun || 0), 0);
-                if(dun === uilchluulegch.niitDun)
-                {
+                if (dun === uilchluulegch.niitDun) {
                   //tulburuu uridchilj tulsun ued
                   uilchluulegch.niitDun = 0;
                   tuukh.tulukhDun = 0;
@@ -892,12 +895,15 @@ export async function sdkData(req: any, callback: any) {
           return {
             aldaa: body.mashiniiDugaar + ' дугаартай машиныг орохыг хориглосон байна.',
           };
-        }
-        else
-        {
+        } else {
           const mashin: any = await (Mashin as any)(body.tukhainBaaziinKholbolt).findOne(mathchMashin);
           const olonMashin: any = await (Mashin as any)(body.tukhainBaaziinKholbolt).findOne(matchOlonMashin);
-          if (khaalga?.turul === 'Орох' && zogsool?.zogsoolTooKhyazgaarlakhEsekh && (sulToo === 0 || sulToo <= -1) && mashin?.turul !== 'VIP') {
+          if (
+            khaalga?.turul === 'Орох' &&
+            zogsool?.zogsoolTooKhyazgaarlakhEsekh &&
+            (sulToo === 0 || sulToo <= -1) &&
+            mashin?.turul !== 'VIP'
+          ) {
             if (zogsool?.zogsoolKhuleekhMashinEsekh && !zogsool?.gadnaZogsooliinId) {
               await (Uilchluulegch as any)(body.tukhainBaaziinKholbolt).deleteMany({
                 mashiniiDugaar: body.mashiniiDugaar,
@@ -932,8 +938,7 @@ export async function sdkData(req: any, callback: any) {
               if (!!mashin) {
                 model.turul = mashin.turul;
                 model.mashin = mashin;
-              }
-              else if(!!olonMashin){
+              } else if (!!olonMashin) {
                 model.turul = olonMashin.turul;
                 model.mashin = olonMashin;
               }
@@ -1017,9 +1022,7 @@ export async function sdkData(req: any, callback: any) {
                     if (uilchluulegchBMashin?.length === 0 || uilchluulegchBMashin?.length < ctDotor) orokhEskh = true;
                   } else orokhEskh = true;
                 }
-              } 
-              else if (mashin?.turul === 'VIP')
-                orokhEskh = true;
+              } else if (mashin?.turul === 'VIP') orokhEskh = true;
             }
             if (orokhEskh) {
               if (!!zogsool?.gadnaZogsooliinId) {
@@ -1141,8 +1144,7 @@ export async function sdkData(req: any, callback: any) {
                   if (!!mashin) {
                     model.turul = mashin.turul;
                     model.mashin = mashin;
-                  }
-                  else if(!!olonMashin) {
+                  } else if (!!olonMashin) {
                     model.turul = olonMashin.turul;
                     model.mashin = olonMashin;
                   }
