@@ -706,6 +706,11 @@ export async function sdkData(req: any, callback: any) {
                 tuukh.tulukhDun = 0;
                 tuukh.tuluv = -1;
               }
+              if (uilchluulegch.turul === 'Пос үнэгүй' && !!tuukh.uneguiGarsan) {
+                uilchluulegch.niitDun = 0;
+                tuukh.tulukhDun = 0;
+                tuukh.tuluv = -1;
+              }
               if (tuukh.tulbur.some((tulbur: any) => tulbur?.turul === 'Хөнгөлөлт')) {
                 const tukhainDun = tuukh.tulbur.find((tulbur: any) => tulbur?.turul === 'Хөнгөлөлт').dun;
                 if (tukhainDun >= tuukh.tulukhDun) {
@@ -726,7 +731,6 @@ export async function sdkData(req: any, callback: any) {
                 }
               }
               tuukh.tsagiinTuukh[0].garsanTsag = odoo;
-              // uilchluulegch.tuukh[0].tulukhDun = uilchluulegch.mashin.turul !== "Үнэгүй" ? dun : 0;
               tuukh.garsanKhaalga = body.CAMERA_IP;
             }
             dotorZogsoolMinut = dotorZogsoolMinut + (tuukh?.niitKhugatsaa || 0);
