@@ -19,7 +19,7 @@ export async function sdkData(req: any, callback: any) {
         body?.baiguullagiinId !== '6715ef2ca5cefb3e54505428')
     ) {
       if (!body.CAMERA_IP && body.camerA_IP) body.CAMERA_IP = body.camerA_IP;
-      var odoo = new Date();
+      var odoo = body.burtgelOgnoo ? new Date(body.burtgelOgnoo) : new Date();
       body.check_in_time = new Date();
       body.check_out_time = new Date();
       const mathchMashin: any = {
